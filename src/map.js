@@ -2,17 +2,17 @@ import './App.css';
 import { useState, useEffect } from 'react';
 
 
-function Map(props) {
+function Map() {
 
     const arr = new Array(4).fill(0);
     const [map44, map44변경] = useState(랜덤추가(arr.map(() => {
         return new Array(4).fill(0)
     })));
-    const [restart, setrestart] = useState(false)
     function randPlus(map44) {
         const ranMap = 랜덤추가(map44);
         return ranMap;
     }
+    const [TouchPosition, setTouchPosition] = useState()
 
 
     function 랜덤추가(map44) {
@@ -250,8 +250,8 @@ function Map(props) {
                 <>
                     <div className="game_end">
                         <div style={{ marginTop: '300px', opacity: '1' }}>
-                            <h1>Game Over</h1>
-                            <button className="restart" style={{ cursor: 'pointer' }} onClick={() => (window.location.reload())}>Restart</button>
+                            <h1 style={{ fontSize: '50px' }}>Game Over</h1>
+                            <h1 className="restart" style={{ cursor: 'pointer', fontSize: '30px' }} onClick={() => (window.location.reload())}>New Game</h1>
                         </div>
                     </div>
                 </>
@@ -277,7 +277,22 @@ function Map(props) {
 
     }
 
-
+    function touchEnd(e) {
+        const distanceX = TouchPosition.x - e.changedTouches[0].pageX
+        const distanceY = TouchPosition.y - e.changedTouches[0].pageY
+        if (distanceX < -30) {
+            key_move(map44, 2)
+        }
+        if (distanceX > 30) {
+            key_move(map44, 4)
+        }
+        if (distanceY > 30) {
+            key_move(map44, 3)
+        }
+        if (distanceY < -30) {
+            key_move(map44, 1)
+        }
+    }
 
     return (
         <>
@@ -289,7 +304,10 @@ function Map(props) {
                 game_success()
             }
             <h1 className="score">Score: {score()}</h1>
-            <table style={{ marginTop: '0px' }}>
+            <table onTouchStart={(e) => setTouchPosition({
+                x: e.changedTouches[0].pageX,
+                y: e.changedTouches[0].pageY
+            })} onTouchEnd={touchEnd}>
 
                 <thead></thead>
                 <tbody>

@@ -5,11 +5,11 @@ import Map from './map.js';
 
 
 function App() {
-  let [map44, map44변경] = useState([0, 1, 2, 3])
+
 
   return (
     <div className="App">
-      <Map map44={map44}></Map>
+      <Map></Map>
     </div>
   );
 }
