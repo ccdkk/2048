@@ -66,7 +66,6 @@ function Map() {
             new_map44[i] = map44[i].filter((x) => x !== 0).concat(map44[i].filter((x) => x === 0));
         }
         return new_map44;
-        // map44변경을 했는데 map44가 변하지 않음 
     };
 
     // for 문을 이용해서 회전 함수 하나로 합쳐보기 and 왼쪽,아래,위,오른쪽도 하나도 합쳐보자
@@ -260,7 +259,6 @@ function Map() {
     }
 
     function game_success() {
-        const game_success = []
         for (let i = 0; i < 4; i++) {
             if (map44[i].find(e => e == 2048)) {
                 return (
